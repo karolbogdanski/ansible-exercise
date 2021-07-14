@@ -6,7 +6,7 @@ netw="ansible-swarm"
 
 
 #-----UNLEASH THE SWARM--------
-./manager/manager.sh
-./worker1/worker1.sh
-./worker2/worker2.sh
+./manager/br_manager.sh
+./worker1/br_worker1.sh
+./worker2/br_worker2.sh
 

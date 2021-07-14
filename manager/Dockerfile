@@ -1,10 +1,12 @@
 FROM ubuntu:latest
 USER root
 
-ENTRYPOINT [ "/sbin/init" ]
+RUN apt update && apt -y install openssh-server
+RUN apt -y install supervisor
 
-RUN apt-get update -y && apt-get upgrade -y
-RUN apt-get install apt-transport-https software-properties-common ca-certificates -y
+RUN sed '$d' /etc/ssh/sshd_config
+RUN echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+RUN echo 'root:haslo123' | chpasswd
 
-RUN apt-get install openssh-server -y
-RUN service ssh start
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ENTRYPOINT /usr/bin/supervisord
