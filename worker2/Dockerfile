@@ -1,7 +1,5 @@
   
-FROM alpine:3.5
-
-# Arguement for Password
+FROM alpine:latest
 
 # Installing the openssh and bash package, removing the apk cache
 RUN apk --update add --no-cache openssh bash \
