@@ -1,13 +1,21 @@
-FROM alpine:latest
+  
+FROM alpine:3.5
 
-RUN apk update && apk add --no-cache supervisor openssh openrc bash
+# Arguement for Password
 
-#COPY supervisord.conf /etc/supervisord.conf
-#CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+# Installing the openssh and bash package, removing the apk cache
+RUN apk --update add --no-cache openssh bash \
+  && sed -i s/#PermitRootLogin.*/PermitRootLogin\ yes/ /etc/ssh/sshd_config \
+  && echo "root:haslo123" | chpasswd \
+  && rm -rf /var/cache/apk/*
 
-#make sure we get fresh keys
-RUN rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key
+# Defining the Port 22 for service
+RUN sed -ie 's/#Port 22/Port 22/g' /etc/ssh/sshd_config
+RUN /usr/bin/ssh-keygen -A
+RUN ssh-keygen -t rsa -b 4096 -f  /etc/ssh/ssh_host_key
+
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
 
 EXPOSE 22
-RUN ssh-keygen -A
-ENTRYPOINT ["/usr/sbin/sshd","-D"]
+CMD ["/usr/sbin/sshd", "-D"]
