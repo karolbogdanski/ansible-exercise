@@ -1,10 +1,13 @@
 FROM alpine:latest
 
-RUN apk update && apk add --no-cache supervisor openssh bash openrc
+RUN apk update && apk add --no-cache supervisor openssh openrc bash
 
-RUN sed '$d' /etc/ssh/sshd_config && echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config && echo 'root:haslo123' | chpasswd
+#COPY supervisord.conf /etc/supervisord.conf
+#CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
-COPY supervisord.conf /etc/supervisord.conf
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+#make sure we get fresh keys
+RUN rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key
 
-ENTRYPOINT ["sh","-c", "rc-status; rc-service sshd start "]
+EXPOSE 22
+RUN ssh-keygen -A
+ENTRYPOINT ["/usr/sbin/sshd","-D"]
