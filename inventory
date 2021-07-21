@@ -1,0 +1,7 @@
+[ubuntu]
+127.0.0.1 ansible_port=2020 ansible_ssh_user=root ansible_ssh_pass=haslo123
+
+[fedora]
+localhost ansible_port=2021
+[alpine]
+localhost ansible_port=2022
