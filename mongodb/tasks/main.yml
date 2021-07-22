@@ -1,2 +1,11 @@
 ---
 # tasks file for mongodb
+
+- include_tasks: Ubuntu.yml
+  when: ansible_os_family == 'Debian'
+
+- include_tasks: Fedora.yml
+  when: ansible_os_family == 'RedHat'
+
+
+
