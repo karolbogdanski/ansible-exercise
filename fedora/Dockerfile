@@ -1,9 +1,10 @@
-FROM fedora:latest
+FROM fedora:32
 USER root
 
 RUN dnf -y install dnf-plugins-core
 RUN dnf -y install openssh-server
 RUN dnf -y install passwd
+RUN dnf -y install python2.7
 
 RUN sed '$d' /etc/ssh/sshd_config && echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config && echo 'root:haslo123' | chpasswd
 

@@ -1,5 +1,5 @@
 ---
-# tasks file for mongodebian
+# tasks file for mongoubuntu
  - name: add MongoDB GPG key
    apt_key:
      keyserver: keyserver.ubuntu.com
