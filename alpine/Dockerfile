@@ -1,14 +1,14 @@
 
 FROM alpine:latest
 
-#RUN apk add --no-cache supervisor
-#RUN mkdir -p /var/log/supervisor
-#COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN apk add --no-cache supervisor
+RUN mkdir -p /var/log/supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN apk add --no-cache python3 py3-pip
 
 # Installing the openssh and bash package, removing the apk cache
-RUN apk --update add --no-cache openssh bash \
+RUN apk --update add --no-cache openssh bash openrc\
   && sed -i s/#PermitRootLogin.*/PermitRootLogin\ yes/ /etc/ssh/sshd_config \
   && echo "root:haslo123" | chpasswd \
   && rm -rf /var/cache/apk/*
@@ -21,5 +21,4 @@ ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 EXPOSE 22
 
-CMD ["/usr/sbin/sshd", "-D"]
-#ENTRYPOINT supervisord -c /etc/supervisor/conf.d/supervisord.conf
+ENTRYPOINT supervisord -c /etc/supervisor/conf.d/supervisord.conf 
