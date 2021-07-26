@@ -3,7 +3,3 @@
 
 - name: start
   ansible.builtin.service: name=mongod state=restarted
-- name: start-ubuntu
-  shell: service ssh restart
-#- name: start-alpine
-#  shell: service sshd restart
