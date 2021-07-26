@@ -1,5 +1,5 @@
 ---
- - hosts: ubuntu, alpine, fedora
+ - hosts: ubuntu, alpine, centos
    gather_facts: true
    become: true
    become_user: root

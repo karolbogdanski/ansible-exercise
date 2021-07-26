@@ -7,6 +7,6 @@ netw="ansible-swarm"
 
 #-----UNLEASH THE SWARM--------
 ./ubuntu/ubuntu.sh
-./fedora/fedora.sh
+./centos/centos.sh
 ./alpine/alpine.sh
 
