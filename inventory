@@ -1,8 +1,8 @@
 [ubuntu]
-ubuntu_host ansible_ssh_host=127.0.0.1 ansible_port=2020 ansible_ssh_user=root ansible_ssh_pass=haslo123
+ubuntu_host ansible_ssh_host=127.0.0.1 ansible_port=2020 ansible_ssh_user=root ansible_ssh_pass=haslo123 
 
 [fedora]
-fedora_host ansible_ssh_host=127.0.0.1 ansible_port=2021 ansible_ssh_user=root ansible_ssh_pass=haslo123 ansible_python_interpreter=python3
+fedora_host ansible_ssh_host=127.0.0.1 ansible_port=2021 ansible_ssh_user=root ansible_ssh_pass=haslo123 
 
 [alpine]
 alpine_host ansible_ssh_host=127.0.0.1 ansible_port=2022 ansible_ssh_user=root ansible_ssh_pass=haslo123 

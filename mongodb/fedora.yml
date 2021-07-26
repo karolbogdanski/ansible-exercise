@@ -7,15 +7,22 @@
    ansible.builtin.dnf: 
      name="mongodb-org, mongodb-org-server"
      state=latest
+     #update_only=yes
  
  - name: remove mongod default a file
    file:
      path: /etc/mongod.conf
      state: absent
  
+ - name: create /db directory
+   file:
+     path: /data/db
+     state: directory
+ 
  - name: mongod conf copy
    template:
-    src: mongodc.j2
+    src: mongodf.j2
     dest: /etc/mongod.conf
+
    notify:
-   - start
+    - start
