@@ -7,7 +7,7 @@
    ansible.builtin.dnf: 
      name="mongodb-org, mongodb-org-server"
      state=latest
-     update_only=yes
+     update_cache=yes
  
  - name: remove mongod default a file
    file:
