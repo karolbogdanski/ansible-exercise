@@ -23,5 +23,6 @@
      path: /data/db
      state: directory
    notify:
+   - ensure-ssh
    - start
 

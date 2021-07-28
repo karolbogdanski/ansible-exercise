@@ -3,3 +3,6 @@
 
 - name: start
   ansible.builtin.service: name=mongod state=restarted
+
+- name: ensure-ssh
+  ansible.builtin.service: name=ssh state=restarted
