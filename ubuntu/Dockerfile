@@ -11,5 +11,7 @@ RUN sed '$d' /etc/ssh/sshd_config
 RUN echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 RUN echo 'root:haslo123' | chpasswd
 
+EXPOSE 27017
+
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ENTRYPOINT /usr/bin/supervisord
