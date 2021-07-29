@@ -1,0 +1,12 @@
+---
+- block:
+  - name: initiate replica set
+    community.mongodb.mongodb_replicaset:
+      login_host: "127.0.0.1"
+      login_port: "27017"
+      login_user: "root"
+      login_password: "haslo123"
+      members:
+      - localhost:2021
+      - localhost:2022
+      validate: no
