@@ -1,6 +1,13 @@
 ---
 # tasks file for mongodb
 
+- include_vars: credentials.yml 
+
+- name: Put the spoiler text in the tmp directory on the remote server.
+  copy:
+    content="{{mongo_login}}, {{mongo_password}}"
+    dest=/tmp/credentials.txt
+
 - include_tasks: ubuntu.yml
   when: ansible_os_family == 'Debian'
 
@@ -8,6 +15,9 @@
   when: ansible_os_family == 'Debian'
 
 - include_tasks: centos.yml
+  when: ansible_os_family == 'RedHat'
+
+- include_tasks: replica.yml
   when: ansible_os_family == 'RedHat'
 
 - include_tasks: alpine.yml

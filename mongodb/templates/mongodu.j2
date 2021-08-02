@@ -21,8 +21,7 @@ systemLog:
 # network interfaces
 net:
   port: 27017
-  bindIp: {{ bind }}
-
+  #bindIp: {{ bind }}
 
 # how the process runs
 processManagement:
@@ -32,7 +31,8 @@ processManagement:
 
 #operationProfiling:
 
-#replication:
+replication:
+  replSetName: "rs0"
 
 #sharding:
 
