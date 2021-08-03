@@ -10,4 +10,4 @@ docker stop alpine
 docker rm alpine
 
 docker build -t alpine:${tag} alpine
-docker run --name="alpine" -d -p 2022:22 --network=${netw} alpine:${tag}
+docker run --name="alpine" -d -p 2022:22 -p 27019:27017 --network=${netw} alpine:${tag}

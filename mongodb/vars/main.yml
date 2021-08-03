@@ -1,3 +1,4 @@
 ---
 # vars file for mongodb
 bind: 0.0.0.0
+docker_network: "172.19.0.1"

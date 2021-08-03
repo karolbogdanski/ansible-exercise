@@ -3,22 +3,20 @@
   - name: initiate replica set
     community.mongodb.mongodb_replicaset:
       replica_set: "{{ mongodb_replSet_name }}"
-      login_host: "172.19.0.1"
+      login_host: "172.19.0.2"
       login_port: "{{ mongodb_conf_port }}"
       members:
-      - 172.19.0.2:27017
-      - 172.19.0.3:27017
-      - 172.19.0.4:27017
+      - 172.19.0.3
+      - 172.19.0.4:"{{ mongodb_conf_port }}"
       validate: no
 
   - name: connect to master
     community.mongodb.mongodb_replicaset:
       replica_set: "{{ mongodb_replSet_name }}"
-      login_host: "172.19.0.1"
+      login_host: "172.19.0.2"
       login_port: "{{ community.mongodb.mongodb_conf_port }}"
       arbiter_only: "{{ community.mongodb.mongodb_replSet_arbiter }}"
       votes: "{{ community.mongodb.mongodb_replSet_votes }}"
       members:
-      - 172.19.0.2:27017
-      - 172.19.0.3:27017
-      - 172.19.0.4:27017
+      - 172.19.0.3
+      - 172.19.0.4:"{{ mongodb_conf_port }}"
