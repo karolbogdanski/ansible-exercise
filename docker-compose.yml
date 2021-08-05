@@ -1,0 +1,28 @@
+
+services:
+    centos1:
+        build: ./centos/
+        image: centos
+        ports:
+            - "2020:22"
+            - "27017:27017"
+        networks:
+            - ansible-swarm
+    centos2:
+        image: centos
+        ports:
+            - "2021:22"
+            - "27018:27017"
+        networks:
+            - ansible-swarm
+    centos3:
+        image: centos
+        ports:
+            - "2022:22"
+            - "27019:27017"
+        networks:
+            - ansible-swarm
+
+networks:
+    ansible-swarm: {}
+

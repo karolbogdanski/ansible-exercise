@@ -11,9 +11,9 @@
   - name: initiate replica set
     community.mongodb.mongodb_replicaset:
       replica_set: "rs0"
-      login_host: "173.19.0.2"
+      login_host: "localhost"
       login_port: "27017"
-      login_user: "test_user"
+      login_user: "admin_user"
       login_password: "test"
       members:
       - 173.19.0.3
