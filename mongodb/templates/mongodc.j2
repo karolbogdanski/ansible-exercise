@@ -27,18 +27,15 @@ processManagement:
 # network interfaces
 net:
   port: 27017
-#  bindIp: {{ docker_network }}  # Listen to local interface only, comment to listen on all interfaces.
+  bindIp: {{ bind }}  # Listen to local interface only, comment to listen on all interfaces.
 
 
 #security:
 
 #operationProfiling:
 
-replication:
+#replication:
   replSetName: "rs0"
-
-
-
 
 #sharding:
 

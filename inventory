@@ -1,8 +1,8 @@
-[ubuntu]
-ubuntu_host ansible_ssh_host=127.0.0.1 ansible_port=2020 ansible_ssh_user=root ansible_ssh_pass=haslo123 
+[centos1]
+centos_host1 ansible_ssh_host=127.0.0.1 ansible_port=2020 ansible_ssh_user=root ansible_ssh_pass=haslo123 
 
-[centos]
-centos_host ansible_ssh_host=127.0.0.1 ansible_port=2021 ansible_ssh_user=root ansible_ssh_pass=haslo123 
+[centos2]
+centos_host2 ansible_ssh_host=127.0.0.1 ansible_port=2021 ansible_ssh_user=root ansible_ssh_pass=haslo123 
 
-[alpine]
-alpine_host ansible_ssh_host=127.0.0.1 ansible_port=2022 ansible_ssh_user=root ansible_ssh_pass=haslo123 
+[centos3]
+centos_host3 ansible_ssh_host=127.0.0.1 ansible_port=2022 ansible_ssh_user=root ansible_ssh_pass=haslo123 

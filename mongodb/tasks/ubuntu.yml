@@ -4,24 +4,32 @@
    apt_key:
      keyserver: https://www.mongodb.org/static/pgp/server-4.4.asc
      id: 656408E390CFB1F5
+ 
  - apt_repository:
     repo: deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse
     state: present
     filename: mongodb-org-4.4.list
+ 
  - name: Update repositories cache and install "mongodb" package
    apt: name=mongodb-org state=present update_cache=true
+ 
  - name: remove a file
    file:
      path: /etc/mongod.conf
      state: absent
+ 
  - name: mongo conf copy
    template:
     src: mongodu.j2
     dest: /etc/mongod.conf
+ 
  - name: create /db directory
    file:
      path: /data/db
      state: directory
-
-   notify:
-    - start
+   
+ - name: start
+   systemd:
+     name: mongod
+     enabled: yes
+     state: started

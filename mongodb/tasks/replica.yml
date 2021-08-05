@@ -1,22 +1,21 @@
 ---
+
 - block:
+  - name: Create database user
+    community.mongodb.mongodb_user:
+      database: "admin"
+      name: "admin_user"
+      password: "test"
+      state: present
+
   - name: initiate replica set
     community.mongodb.mongodb_replicaset:
-      replica_set: "{{ mongodb_replSet_name }}"
-      login_host: "172.19.0.2"
-      login_port: "{{ mongodb_conf_port }}"
+      replica_set: "rs0"
+      login_host: "173.19.0.2"
+      login_port: "27017"
+      login_user: "test_user"
+      login_password: "test"
       members:
-      - 172.19.0.3
-      - 172.19.0.4:"{{ mongodb_conf_port }}"
+      - 173.19.0.3
+      - 173.19.0.4
       validate: no
-
-  - name: connect to master
-    community.mongodb.mongodb_replicaset:
-      replica_set: "{{ mongodb_replSet_name }}"
-      login_host: "172.19.0.2"
-      login_port: "{{ community.mongodb.mongodb_conf_port }}"
-      arbiter_only: "{{ community.mongodb.mongodb_replSet_arbiter }}"
-      votes: "{{ community.mongodb.mongodb_replSet_votes }}"
-      members:
-      - 172.19.0.3
-      - 172.19.0.4:"{{ mongodb_conf_port }}"

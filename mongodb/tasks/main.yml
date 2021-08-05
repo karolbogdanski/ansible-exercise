@@ -8,15 +8,12 @@
     content="{{mongo_login}}, {{mongo_password}}"
     dest=/tmp/credentials.txt
 
-- include_tasks: ubuntu.yml
-  when: ansible_os_family == 'Debian'
+- name: Install and configure MongoDB
+  block:
+    - include_tasks: centos.yml
+      #when: ansible_os_family == 'RedHat'
+  tags: deploy
 
-- include_tasks: replica.yml
-  when: ansible_os_family == 'Debian'
-
-- include_tasks: centos.yml
-  when: ansible_os_family == 'RedHat'
-
-- include_tasks: alpine.yml
-  when: ansible_os_family == 'Alpine'
-
+- name: Configure replica set
+  include: replica.yml
+  tags: restart

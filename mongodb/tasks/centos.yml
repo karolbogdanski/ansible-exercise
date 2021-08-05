@@ -1,28 +1,34 @@
 ---
-# tasks file for mongofedora
- - name: Copy mongodb repository 
-   copy: src=files/mongodb-org-4.4.repo dest=/etc/yum.repos.d/mongodb-org-4.4.repo
+# tasks file for centos
+- name: Copy MongoDB repository
+  copy: 
+      src=files/mongodb-org-4.4.repo
+      dest=/etc/yum.repos.d/mongodb-org-4.4.repo
+
+- name: Install Pymongo
+  pip:
+      name=pymongo
+
+- name: Install MongoDB
+  ansible.builtin.dnf: 
+    name="mongodb-org, mongodb-org-server"
+    state=latest
+    update_cache=yes
  
- - name: Install MongoDB
-   ansible.builtin.dnf: 
-     name="mongodb-org, mongodb-org-server"
-     state=latest
-     update_cache=yes
+- name: remove mongod default a file
+  file:
+    path: /etc/mongod.conf
+    state: absent
  
- - name: remove mongod default a file
-   file:
-     path: /etc/mongod.conf
-     state: absent
+- name: create /db directory
+  file:
+    path: /data/db
+    state: directory
  
- - name: create /db directory
-   file:
-     path: /data/db
-     state: directory
- 
- - name: mongod conf copy
-   template:
-    src: mongodf.j2
+- name: mongod conf copy
+  template:
+    src: mongodc.j2
     dest: /etc/mongod.conf
 
-   notify:
+  notify:
     - start
